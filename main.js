@@ -1,36 +1,50 @@
+// tạo bản ghi
+var currentIndex = 0;
 function saveNumber(value) {
   var form_element = "";
   for (let index = 0; index < value; index++) {
-    form_element +=
-      '<p class="mt-5">Bản ghi số: ' +
-      (index + 1) +
-      "</p>\n" +
-      `<div class="row" onsubmit="return false">
-    <div class="col-md-6">
+    if (currentIndex == index) {
+      form_element +=
+        '<p class="mt-5">Bản ghi số: ' +
+        (index + 1) +
+        "</p>\n" +
+        `<div class="row" onsubmit="return false">
+      <div class="col-md-6">
       <label for="studentName" class="form-label">Full Name</label>
       <input type="text" name = "fname[]" class="form-control" id="studentName" />
-    </div>
-    <div class="col-md-6">
+      </div>
+      <div class="col-md-6">
       <label for="studentClass" class="form-label">Class Name</label>
       <input type="text" name = "className[]" class="form-control" id="studentClass" />
-    </div>
-    <div class="col-12">
+      </div>
+      <div class="col-12">
       <label for="point15p" class="form-label">Point 15p</label>
       <input type="number" min="0" max="10" step="0.01" name = "point15p[]" class="form-control" id="point15p" />
-    </div>
-    <div class="col-12">
+      </div>
+      <div class="col-12">
       <label for="lessonPoint" class="form-label">Lesson point</label>
       <input type="number" min="0" max="10" step="0.01" name = "lessonPoint[]" class="form-control" id="lessonPoint"/>
-    </div>
-    <div class="col-12">
+      </div>
+      <div class="col-12">
       <label for="semesterGrade" class="form-label">Semester grades</label>
       <input type="number" min="0" max="10" step="0.01" name = "semesterGrade[]" class="form-control" id="semesterGrade" />
-    </div>
-  </div>`;
+      </div>
+      </div>`;
+    }
   }
+
   document.getElementById("info_user").innerHTML = form_element;
 }
 
+var btn = document.getElementById("btn");
+function test(event) {
+  event.preventDefault();
+  console.log(currentIndex);
+  return (currentIndex += 1);
+}
+btn.addEventListener("click", test);
+
+// lưu bảng vào 1 mảng rồi in ra
 function mySubmitFunction(event) {
   event.preventDefault();
   document.getElementById("content").innerHTML = "";
