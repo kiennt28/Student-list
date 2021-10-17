@@ -1,14 +1,12 @@
 // tạo bản ghi
-var currentIndex = 0;
+var currentIndex = 1;
 function saveNumber(value) {
   var form_element = "";
-  for (let index = 0; index < value; index++) {
-    if (currentIndex == index) {
-      form_element +=
-        '<p class="mt-5">Bản ghi số: ' +
-        (index + 1) +
-        "</p>\n" +
-        `<div class="row" onsubmit="return false">
+  form_element +=
+    '<p class="mt-5">Bản ghi số: ' +
+    currentIndex +
+    "</p>\n" +
+    `<div class="row" onsubmit="return false">
       <div class="col-md-6">
       <label for="studentName" class="form-label">Full Name</label>
       <input type="text" name = "fname[]" class="form-control" id="studentName" />
@@ -30,8 +28,6 @@ function saveNumber(value) {
       <input type="number" min="0" max="10" step="0.01" name = "semesterGrade[]" class="form-control" id="semesterGrade" />
       </div>
       </div>`;
-    }
-  }
 
   document.getElementById("info_user").innerHTML = form_element;
 }
@@ -39,21 +35,29 @@ function saveNumber(value) {
 var btn = document.getElementById("btn");
 function test(event) {
   event.preventDefault();
-  console.log(currentIndex);
-  return (currentIndex += 1);
+  const maxValue = document.getElementById("inputValue").value;
+  if (currentIndex === +maxValue) {
+    return;
+  }
+
+  currentIndex += 1;
+  saveNumber();
 }
 btn.addEventListener("click", test);
 
 // lưu bảng vào 1 mảng rồi in ra
+var data = [];
 function mySubmitFunction(event) {
   event.preventDefault();
+  const maxValue = document.getElementById("inputValue").value;
   document.getElementById("content").innerHTML = "";
   var input1 = document.getElementsByName("fname[]");
   var input2 = document.getElementsByName("className[]");
   var input3 = document.getElementsByName("point15p[]");
   var input4 = document.getElementsByName("lessonPoint[]");
   var input5 = document.getElementsByName("semesterGrade[]");
-  var data = [];
+  // var value = document.getElementById("studentClass").value; 
+  // console.log(document.getElementById("studentClass").value);
   for (var i = 0; i < input1.length; i++) {
     data.push({
       fname: input1[i].value,
@@ -105,5 +109,8 @@ function mySubmitFunction(event) {
       "<tr>\n";
     // console.log(data[index].semesterGrade);
   }
-  document.getElementById("content").innerHTML = element;
+
+  if (currentIndex === +maxValue) {
+    document.getElementById("content").innerHTML = element;
+  }
 }
