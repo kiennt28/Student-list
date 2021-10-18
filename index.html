@@ -13,29 +13,35 @@
     <title>Student List</title>
   </head>
   <body>
+    <div id="error">
+
+    </div>
     <div class="container">
-      <form >
-        <input 
+        <input
           class="form-control mt-4 w-50"
           id="inputValue"
           type="number"
           placeholder="Number"
-          onchange="saveNumber(this.value)"
+          onchange="test()"
         />
-        <div id="info_user"></div>
-        <div class="col-12">
-          <button
-            id="btn"
-            type="submit"
-            class="btn btn-primary btn-lg mt-4"
-            onclick="mySubmitFunction(event)"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
+    </div>
+    <form 
+    onsubmit="event.preventDefault(); mySubmitFunction()">
+      <div id="info_user">
+      </div>
+      <div class="col-12">
+        <button
+          id="btn"
+          type="submit"
+          class="btn btn-primary btn-lg mt-4"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
     </div>
     <div class="container">
+      <p class="text-center" id="demo"></p>
       <table class="table table-hover mt-5">
         <thead>
           <tr>
